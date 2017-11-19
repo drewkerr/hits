@@ -1,0 +1,18 @@
+p= "results: " + list.resultCount
+if list.resultCount > 0
+  table
+    tr
+      th Add
+      th(colspan=2) Track
+      th Preview
+    each song in list.results
+      tr
+        td
+          button.add(data=song) Add
+        td
+          img.artwork(src=song.artworkUrl100)
+        td= song.artistName + " - " + song.trackCensoredName
+        td
+          audio(controls src=song.previewUrl preload="none")
+else
+  p No results.

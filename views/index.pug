@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title Hits!
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    block style
+      link(rel="stylesheet" href="/style.css")
+  body
+    block content
+      h1 Hits!
+      form
+        input
+        button Search
+      #results
+      #ranking
+        - list = list.sort(function (a, b) { return (b['votes'] > a['votes']) ? 1 : ((b['votes'] < a['votes']) ? -1 : 0) })
+        if list.length > 0
+          table
+            tr
+              th(colspan=3) Votes
+              th(colspan=2) Track
+              th Preview
+            each song in list
+              tr
+                td
+                  button.up(class=song.trackId) Up
+                td= song.votes
+                td
+                  button.down(class=song.trackId) Down
+                td
+                  img.artwork(src=song.artworkUrl100)
+                td= song.artistName + " - " + song.trackCensoredName
+                td
+                  audio(controls src=song.previewUrl preload="none")
+        else
+          p No hits!
+    block scripts
+      script(src="https://code.jquery.com/jquery-2.2.1.min.js")
+      script(src="/socket.io/socket.io.js")
+      script(src="/client.js")
