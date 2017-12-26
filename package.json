@@ -1,6 +1,6 @@
 {
   "name": "hits",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Vote for your favourite songs",
   "main": "server.js",
   "scripts": {
