@@ -182,10 +182,16 @@ io.on('connection', function(socket) {
           list.push(results)
           console.log(socket.name, 'added:', song.trackName)
           var rsong = JSON.parse(JSON.stringify(results))
-          rsong.voted = true
-          socket.emit('added', { song: [rsong], name: socket.name })
-          rsong.voted = false
-          socket.broadcast.emit('added', { song: [rsong], name: socket.name })
+          for (var i in io.connected) {
+            var s = io.connected[i]
+            if (socket.id === s.id || ! s.user) {
+              rsong.voted = true
+              io.to(s.id).emit('added', { song: [rsong], name: socket.name })
+            } else {
+              rsong.voted = false
+              io.to(s.id).emit('added', { song: [rsong], name: socket.name })
+            }
+          }
         }
       })
     } else {
@@ -203,6 +209,9 @@ io.on('connection', function(socket) {
 })
 
 function vote(trackId, socket, up) {
+  if ( ! socket.user ) {
+    return
+  }
   var i = list.findIndex(track => track['trackId'] == trackId)
   if ( list[i].voted.indexOf(socket.user) < 0 ) {
     up ? list[i].votes++ : list[i].votes--

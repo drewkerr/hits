@@ -9,15 +9,15 @@ html
   body
     block content
       nav
-        h1 Hits!
+        h1 &#128251; Hits!
         if profile
           form(action="/")
-            input(name="search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="Search for music")
+            input(name="search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="🔍 Search for music")
           #profile
             if profile.image
               img(src=profile.image)
             span #{profile.displayName}&nbsp;
-              a(href="logout") (logout)
+              a(href="logout" title="Logout") &#65339;&rarr;
         else
           #profile
             a(href="login") Login to vote
