@@ -16,11 +16,11 @@ html
           #profile
             if profile.image
               img(src=profile.image)
-            span #{profile.displayName}&nbsp;
+            span #{profile.displayName}
               a(href="logout" title="Logout") &#65339;&rarr;
         else
           #profile
-            a(href="login") Login to vote
+            a(href="login") Login to vote&#65339;&larr;
       #results
       #ranking
         table
