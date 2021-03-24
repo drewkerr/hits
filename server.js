@@ -142,7 +142,7 @@ io.on('connection', function(socket) {
   socket.emit('refresh', rlist)
   
   socket.on('search', function(term, fn) {
-    console.log('Search for: '+term)
+    console.log('Search for:', term)
     var results = { resultCount: 0, results: [] }
     var url = 'https://itunes.apple.com/search?media=music&explicit=no&limit=10&term='
     url += encodeURIComponent(term)
